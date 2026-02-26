@@ -148,7 +148,6 @@ This project is deployed on **Vercel**. To deploy your own instance:
 3. Vercel auto-detects Next.js — click **Deploy**
 4. Your live URL is ready in seconds
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new?utm_source=github)
 
 ---
 
