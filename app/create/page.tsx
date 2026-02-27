@@ -57,7 +57,8 @@ export default function CreateTape() {
         try {
             // Base64 encode the JSON data safely for URL
             const dataStr = JSON.stringify(payload);
-            const encoded = btoa(encodeURIComponent(dataStr));
+            const b64 = btoa(encodeURIComponent(dataStr));
+            const encoded = b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
             router.push(`/tape/${encoded}`);
         } catch (e) {
             console.error("Error encoding tape data", e);
@@ -117,8 +118,8 @@ export default function CreateTape() {
                                     key={c.name}
                                     onClick={() => setColor(c.class)}
                                     className={`w-12 h-12 rounded-full border-2 transition-all ${c.class} ${color === c.class
-                                            ? "border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.3)]"
-                                            : "border-transparent hover:scale-105 opacity-70 hover:opacity-100"
+                                        ? "border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                                        : "border-transparent hover:scale-105 opacity-70 hover:opacity-100"
                                         }`}
                                     aria-label={`Select ${c.name} color`}
                                 />

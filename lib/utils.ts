@@ -12,7 +12,18 @@ export function parseYouTubeId(url: string): string | null {
 
 export function decodeTapeData(encoded: string): TapeData | null {
     try {
-        const decoded = decodeURIComponent(atob(encoded));
+        // Decode URI component in case next.js router percent-encoded anything
+        const cleanEncoded = decodeURIComponent(encoded);
+
+        // Convert base64url format to standard base64 if needed
+        let base64 = cleanEncoded.replace(/-/g, '+').replace(/_/g, '/');
+
+        // Add required base64 padding
+        while (base64.length % 4 !== 0) {
+            base64 += '=';
+        }
+
+        const decoded = decodeURIComponent(atob(base64));
         const data = JSON.parse(decoded);
 
         // Basic validation
